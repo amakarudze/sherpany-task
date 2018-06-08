@@ -1,5 +1,10 @@
 from selenium import webdriver
 
+browser = webdriver.Firefox()
+
+browser.get('http://localhost:8000')
+
+assert 'Django' in browser.title
 # Edina has heard about a cool new reverse geocoding address app. She goes
 # to check out its homepage.
 
