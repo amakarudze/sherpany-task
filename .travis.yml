@@ -7,7 +7,7 @@ install:
   - pip install codecov
 
 script:
-  - coverage run tests.py
+  - coverage run functional_tests.py
 
 after_success:
   - codecov
