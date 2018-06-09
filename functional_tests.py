@@ -1,14 +1,20 @@
 from selenium import webdriver
 import unittest
 
-browser = webdriver.Firefox()
+class NewVisitorTest(unittest.TestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
 
-# Edina has heard about a cool new reverse geocoding address app. She goes
-# to check out its homepage.
-browser.get('http://localhost:8000')
+    def tearDown(self):
+        self.browser.quit()
 
-# She notices that the page title and header mentions a map and addresses.
-assert 'Maps & Addresses' in browser.title
+    def test_can_click_on_map_and_address_address(self):
+        # Edina has heard about a cool new reverse geocoding address app. She goes
+        # to check out its homepage.
+        self.browser.get('http://localhost:8000')
+
+        # She notices that the page title and header mentions a map and addresses.
+        self.assertIn('Maps & Addresses', self.browser.title)
 
 # She is invited to click on the map and get the address of the clicked
 # location.
@@ -31,4 +37,5 @@ assert 'Maps & Addresses' in browser.title
 
 # Satisfied, she closes the app to re-visit it again later.
 
-browser.quit()
+if __name__ == '__main__':
+    unittest.main(warnings='ignore')
