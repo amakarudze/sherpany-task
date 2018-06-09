@@ -1,14 +1,14 @@
 from selenium import webdriver
+import unittest
 
 browser = webdriver.Firefox()
 
-browser.get('http://localhost:8000')
-
-assert 'Django' in browser.title
 # Edina has heard about a cool new reverse geocoding address app. She goes
 # to check out its homepage.
+browser.get('http://localhost:8000')
 
 # She notices that the page title and header mentions a map and addresses.
+assert 'Maps & Addresses' in browser.title
 
 # She is invited to click on the map and get the address of the clicked
 # location.
@@ -31,3 +31,4 @@ assert 'Django' in browser.title
 
 # Satisfied, she closes the app to re-visit it again later.
 
+browser.quit()
