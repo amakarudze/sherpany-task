@@ -1,5 +1,12 @@
-from selenium import webdriver
 import unittest
+import time
+import json
+import sys
+import requests
+
+from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 class NewVisitorTest(unittest.TestCase):
     def setUp(self):
@@ -27,9 +34,12 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn('Addresses of clicked locations', heading_text)
 
         # She clicks on the map and the app looks up the address of clicked location.
+        ActionChains(self.browser).move_to_element(my_map).click(my_map).perform()
+
 
         # She notices the page refreshes and the address is listed below on the list
         # of addresses.
+        time.sleep(1)
 
         # She notices a marker appear on the map on the location she clicked.
 
