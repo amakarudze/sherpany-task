@@ -1,13 +1,14 @@
 certifi==2018.4.16
 chardet==3.0.4
 coverage==4.5.1
-Django==1.9
+Django==1.11
 django-cors-headers==2.2.0
 django-filter==1.1.0
 djangorestframework==3.8.2
 drf-schema-adapter==0.9.62
 idna==2.6
 Inflector==2.0.12
+pytz==2018.4
 requests==2.18.4
 selenium==3.12.0
 six==1.11.0

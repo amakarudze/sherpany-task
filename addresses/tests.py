@@ -1,4 +1,10 @@
+import json
+import sys
+import requests
+
 from django.test import TestCase
+
+from .models import Address
 
 
 class HomePageTest(TestCase):

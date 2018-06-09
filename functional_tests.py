@@ -1,8 +1,5 @@
 import unittest
 import time
-import json
-import sys
-import requests
 
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
