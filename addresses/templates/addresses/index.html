@@ -42,11 +42,9 @@
         <hr>
 
         <!--The div element for the map -->
-        <form method="post">
-            <div id="map" class="map">
-            </div>
-        </form>
-
+        <div id="map" class="map">
+        </div>
+        
         <!-- Script for loading map -->
         <script>
             // Note: This example requires that you consent to location sharing when
@@ -65,37 +63,49 @@
                 // Try HTML5 geolocation.
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
 
-                        var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
-                        geocoder.geocode({'location': latlng}, function (results, status) {
-                            if (status === 'OK') {
-                                if (results[0]) {
-                                    map.setZoom(11);
-                                    var marker = new google.maps.Marker({
-                                        position: latlng,
-                                        map: map
-                                    });
-                                    infowindow.setContent(results[0].formatted_address);
-                                    infowindow.open(map, marker);
-                                }
-                                else {
-                                    window.alert('No results found');
-                                }
-                            }
-                            else {
-                                window.alert('Geocoder failed due to: ' + status);
-                            }
-                        });
+                        // Get user's location
+                        geocodeLatLng(geocoder, map, infowindow, pos);
 
                         //Add listener
                         map.addListener("click", function (event) {
-                            var latitude = event.latLng.lat();
-                            var longitude = event.latLng.lng();
-                            console.log(latitude + ', ' + longitude);
+                            var pos = {
+                                lat: event.latLng.lat(),
+                                lng: event.latLng.lng()
+                            };
+                            geocodeLatLng(geocoder, map, infowindow, pos);
+                            console.log(pos);
                         }); //end addListener
                     });
                 }
             }
+
+            function geocodeLatLng(geocoder, map, infowindow, pos) {
+                var latlng = {lat: pos.lat, lng: pos.lng};
+                geocoder.geocode({'location': latlng}, function(results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                        map.setZoom(11);
+                        var marker = new google.maps.Marker({
+                            position: latlng,
+                            map: map
+                        });
+                        infowindow.setContent(results[0].formatted_address);
+                        infowindow.open(map, marker);
+                    }
+                    else {
+                        window.alert('No results found');
+                        }
+                    }
+                    else {
+                        window.alert('Geocoder failed due to: ' + status);
+                    }
+                });
+      }
 
         </script>
 
