@@ -3,12 +3,17 @@ import json
 
 from django.shortcuts import render
 
+from .models import Address
 
-def reverse_geolocation():
+
+def validate_address():
     pass
 
 
 def home_page(request):
-    return render(request, 'addresses/index.html')
+    address_list = Address.objects.all()
+    return render(request, 'addresses/index.html', {'address_list': address_list,})
 
 
+def reset_map():
+    pass

@@ -42,15 +42,14 @@
         <hr>
 
         <!--The div element for the map -->
-        <div id="map" class="map">
-        </div>
-        
+        <form method="post">
+            <div id="map" class="map">
+            </div>
+            {% csrf_token %}
+        </form>
+
         <!-- Script for loading map -->
         <script>
-            // Note: This example requires that you consent to location sharing when
-            // prompted by your browser. If you see the error "The Geolocation service
-            // failed.", it means you probably did not give permission for the browser to
-            // locate you.
             var map, infoWindow;
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
@@ -95,6 +94,8 @@
                             map: map
                         });
                         infowindow.setContent(results[0].formatted_address);
+                        var address = results[0].formatted_address;
+                        console.log(address);
                         infowindow.open(map, marker);
                     }
                     else {
@@ -112,6 +113,17 @@
         <hr>
         <h2>Addresses of clicked locations</h2>
         <hr>
+        {% if address_list %}
+            {% for address in address_list %}
+                {% if forloop.first %}<div class="row">{% endif %}
+                    <div class="col-md-6">
+                        <h5 class="">{{ address.address }}</h5>
+                        <p>Coordinates: {{ address.lat }}, {{ address.lng }}</p>
+                    </div>
+                {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
+                {% if forloop.last %}</div>{% endif %}
+            {% endfor %}
+        {% endif %}
 
     </div>
 
