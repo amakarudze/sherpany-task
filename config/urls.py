@@ -21,6 +21,6 @@ from addresses import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home_page, name='home'),
-    url(r'^ajax/validate_address/$', views.validate_address, name='validate_address'),
+    url(r'^ajax/add_address/$', views.add_address, name='add_address'),
     url(r'^ajax/reset_map/$', views.reset_map, name='reset_map'),
 ]

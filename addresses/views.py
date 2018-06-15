@@ -4,20 +4,15 @@ from django.http import JsonResponse, HttpResponseRedirect
 from .models import Address
 
 
-def validate_address(request):
-    address = request.GET.get('address', None)
-    data = {
-        'is_saved': Address.objects.filter(address__iexact=address).exists()
-    }
-    if data['is_saved']:
-        data['error_message'] = 'Address already exists in the database and Google Fusion Tables.'
-    elif "Unnamed Road" in address:
-        data['error_message'] = 'The place you clicked does not have an address.'
-    else:
-        address = request.GET.get('address')
-        lat = request.GET.get('lat')
-        lng = request.GET.get('lng')
+def add_address(request):
+    if request.method == 'POST':
+        address = request.POST.get('address')
+        lat = request.POST.get('lat')
+        lng = request.POST.get('lng')
         Address.create(lat, lng, address)
+
+    else:
+        data = 'Save failed'
     return JsonResponse(data)
 
 
