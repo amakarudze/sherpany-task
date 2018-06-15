@@ -11,3 +11,8 @@ class Address(models.Model):
 
     def __str__(self):
         return self.address
+
+    @classmethod
+    def create(cls, lat, lng, address):
+        new_address = cls(lat=lat, lng=lng, address=address)
+        return new_address
