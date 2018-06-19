@@ -6,7 +6,7 @@ from .models import Address
 
 
 def home_page(request):
-    address_list = None
+    address_list = Address.objects.all()
     return render(request, 'addresses/index.html', {'address_list': address_list,})
 
 
@@ -23,11 +23,6 @@ def add_address(request):
         data['error_message'] = 'Location does not have an address and cannot be saved.'
     else:
         deserialized_object.save()
-    return JsonResponse(data)
-
-
-def get_addresses():
-    data = Address.objects.all()
     return JsonResponse(data)
 
 

@@ -107,6 +107,11 @@
                             contentType : 'application/json',
                             type : 'POST'
                         });
+
+                        $.ajax('/',{
+                            contentType : 'application/json',
+                            type: 'GET'
+                            });
                     }
                     else {
                         window.alert('No results found');
@@ -123,13 +128,6 @@
         <h2>Addresses of clicked locations</h2>
         <hr>
 
-        <script>
-            $.ajax('ajax/get_addresses/',{
-            data: data,
-            contentType : 'application/json',
-            type: 'GET'
-            });
-        </script>
         {% if address_list %}
             {% for address in address_list %}
                 {% if forloop.first %}<div class="row">{% endif %}
