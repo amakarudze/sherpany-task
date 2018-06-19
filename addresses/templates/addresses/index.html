@@ -101,15 +101,11 @@
                         infowindow.open(map, marker);
 
                         postdata = JSON.stringify({address: address, lat: lat, lng: lng});
-                        csrf_token = $("#add_address_Form").find("input[name='csrf_token']").val();
 
                         $.ajax('/ajax/add_address/', {
-                            data : {
-                                "csrf_token" : csrf_token,
-                                "postdata": postdata
-                            },
+                            data : postdata,
                             contentType : 'application/json',
-                            type : 'POST',
+                            type : 'POST'
                         });
                     }
                     else {
@@ -127,6 +123,13 @@
         <h2>Addresses of clicked locations</h2>
         <hr>
 
+        <script>
+            $.ajax('ajax/get_addresses/',{
+            data: data,
+            contentType : 'application/json',
+            type: 'GET'
+            });
+        </script>
         {% if address_list %}
             {% for address in address_list %}
                 {% if forloop.first %}<div class="row">{% endif %}
@@ -143,13 +146,8 @@
 
     <!-- jQuery scripts for Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-
+    <!-- Custom script for CSRF -->
+    <script src="{% static 'addresses/js/main.js' %}"></script>
     <!-- Required Google Maps API -->
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6NJXgu0TnwZ1zYrkKi2mnqtM5fUjyVHo&callback=initMap">
