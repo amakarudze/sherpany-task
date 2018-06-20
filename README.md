@@ -41,14 +41,27 @@ The project is designed to run with one model `Address` which is in `models.py` 
  `python manage.py migrate`
 
 ### Adding Google Maps and Google Fusion Table API Keys
-Create API keys for [Google Maps](https://developers.google.com/maps/documentation/javascript/get-api-key) and
-[Google Fusion Tables](https://developers.google.com/fusiontables/docs/v1/using#APIKey) and update
-`YOUR_KEY` values in `templates/addresses/index.html` file.
-
 If you do not have a separate developer account with [Google](https://mail.google.com), it maybe necessary that
-you sign up for one that you will use to work with Google Fusion Tables so that you do not risk losing your data.
+you sign up for one that you will use to work with Google Maps and Google Fusion Tables so that you do not risk
+losing your data.
+
+#### Adding Google Maps API Key
+Create API key for [Google Maps](https://developers.google.com/maps/documentation/javascript/get-api-key) and
+`YOUR_API_KEY` values in `templates/addresses/index.html` file in this line:
+
+`<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=**YOUR_API_KEY**&callback=initMap">
+    </script>`
+
+#### Google Fusion Table API Key
 Visit [this link](https://support.google.com/fusiontables/answer/184641?hl=en) for more information on how to get started with
 [Google Fusion Tables](https://support.google.com/fusiontables/answer/184641?hl=en) if you are new to them.
+
+Create API key for [Google Fusion Tables](https://developers.google.com/fusiontables/docs/v1/using#APIKey) and
+append the query parameter key=`YOUR_API_KEY` to all request URLs. For example, in a `SELECT` query,
+
+`https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM
+     1KxVV0wQXhxhMScSDuqr-0Ebf0YEt4m4xzVplKd4&key=**YOUR_API_KEY**`
 
 ### Testing
 To check that the project is properly run tests by running the functional tests in `functional_tests.py` and units tests
