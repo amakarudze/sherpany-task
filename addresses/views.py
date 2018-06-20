@@ -11,10 +11,10 @@ def home_page(request):
 
 
 def add_address(request):
-    location = request.POST.get('postdata')
-    for deserialized_object in serializers.deserialize("json", location):
+    place = request.POST.get('postdata')
+    for deserialized_object in serializers.deserialize("json", place):
         data = {
-            'is_duplicate': Address.objects.filter(address__iexact=deserialized_object.address).exists(),
+            'is_duplicate': Address.objects.filter(location__iexact=deserialized_object.address).exists(),
             'has_no_address': 'Unnamed Road' in deserialized_object.address
         }
         if data['is_duplicate']:
@@ -22,7 +22,7 @@ def add_address(request):
         elif data['has_no_address']:
             data['error_message'] = 'Location does not have an address and cannot be saved.'
         else:
-            Address.objects.create(address=deserialized_object.address,
+            Address.objects.create(location=deserialized_object.address,
                                    lat=float(deserialized_object.lat),
                                    lng=float(deserialized_object.lng))
     return JsonResponse(data)
