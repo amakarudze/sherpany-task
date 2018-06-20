@@ -86,16 +86,16 @@
                 if (status === 'OK') {
                     if (results[0]) {
                         map.setZoom(1);
-                        var marker = new google.maps.Marker({
+                        /* var marker = new google.maps.Marker({
                             position: latlng,
                             map: map
-                        });
-                        infowindow.setContent(results[0].formatted_address);
+                        });*/
+                        // infowindow.setContent(results[0].formatted_address);
                         var address = results[0].formatted_address;
                         var lat = pos.lat;
                         var lng = pos.lng;
                         console.log(address, lat, lng);
-                        infowindow.open(map, marker);
+                        // infowindow.open(map, marker);
 
                         postdata = [
                             {
