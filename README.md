@@ -13,7 +13,7 @@ Create API keys for [Google Maps](https://developers.google.com/maps/documentati
 [Google Fusion Tables](https://developers.google.com/fusiontables/docs/v1/using#APIKey) and update
 `YOUR_KEY` values in `templates/addresses/index.html` file.
 
-If you do not have a separate developer account with [GMAIL] (https://mail.google.com), it maybe necessary that
+If you do not have a separate developer account with [GMail](https://mail.google.com), it maybe necessary that
 you sign up for one that you will use to work with Google Fusion Tables so that you do not risk losing your data.
 
 ## How-to Guides
