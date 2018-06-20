@@ -25,6 +25,7 @@ This is app requires the following to run:
 ### Installation
 Clone or download this repository, create and activate a virtual environment. Install required packages
 in your virtual environment using the command:
+
  `pip install -r requirements.txt`
 
 If you are new to Django, you can learn  more on Python and Django installation from the
@@ -33,7 +34,9 @@ If you are new to Django, you can learn  more on Python and Django installation 
 ### Setting up the project
 The project is designed to run with one model `Address` which is in `models.py` of `addresses` module. To have this
  model working, you need to run migrations by running these commands:
+
  `python manage.py makemigrations`
+
  `python manage.py migrate`
 
 ### Adding Google Maps and Google Fusion Table API Keys
