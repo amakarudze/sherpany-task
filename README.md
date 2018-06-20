@@ -19,9 +19,9 @@ This is app requires the following to run:
  - Python 3.6+
  - Django 1.9
  - Google Developer Account
+ - Google APIs Client Library for Python
  - Google Maps API Key
  - Google Fusion Tables API Key
- - Google APIs Client Library for Python
  - Geckodriver for running functional tests with Selenium and Mozilla Firefox browser.
 
 ### Installation
@@ -40,6 +40,13 @@ The project is designed to run with one model `Address` which is in `models.py` 
  `python manage.py makemigrations`
 
  `python manage.py migrate`
+
+### Working with Google APIs Client Library for Python
+Before you can create APIs keys for Google Maps or Google Fusion Tables, you need to create your project on [Google
+ API Console](https://console.developers.google.com/). This is the project you will need to generate API keys for on
+ Google Maps API and Google Fusion Table API consoles. You can learn more about
+ [Google APIs Client for Python](https://developers.google.com/api-client-library/python/start/get_started) by
+ reading the [API documentation](https://developers.google.com/api-client-library/python/start/get_started).
 
 ### Adding Google Maps and Google Fusion Table API Keys
 If you do not have a separate developer account with [Google](https://mail.google.com), it maybe necessary that
@@ -64,8 +71,6 @@ append the query parameter key=`YOUR_API_KEY` to all request URLs. For example, 
 `https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM
      1KxVV0wQXhxhMScSDuqr-0Ebf0YEt4m4xzVplKd4&key=`
      `YOUR_API_KEY`
-
-### Working with Google APIs Client Library for Python
 
 
 ### Testing
