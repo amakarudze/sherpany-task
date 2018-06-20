@@ -9,7 +9,7 @@ this work. It is not intended to explain the topics in depth but provide you wit
 to achieve in just a few steps, and how to go about it.
 
 Once you’re familiar with the basics presented in the tutorial, you will find the more in-depth coverage of the
-same topics in the *How-to* section.
+same topics in the **How-to** section.
 
 The tutorials follow a logical progression, starting from installation so it is recommended to work through them in
 the order presented here.
