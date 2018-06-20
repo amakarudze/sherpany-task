@@ -1,6 +1,6 @@
 # maps-addresses
 This is an app that enables you to get addresses of clicked places and saves
-them to an Sqlite database and Google Fusion Table.
+them to an sqlite database and Google Fusion Table.
 
 ## Tutorial
 This section of the documentation is aimed at a newcomer to [maps-addresses](https://github.com/amakarudze/sherpany-task).
@@ -21,6 +21,7 @@ This is app requires the following to run:
  - Google Developer Account
  - Google Maps API Key
  - Google Fusion Tables API Key
+ - Geckodriver for running functional tests with Selenium and Mozilla Firefox browser.
 
 ### Installation
 Clone or download this repository, create and activate a virtual environment. Install required packages
@@ -49,6 +50,23 @@ you sign up for one that you will use to work with Google Fusion Tables so that 
 Visit [this link](https://support.google.com/fusiontables/answer/184641?hl=en) for more information on how to get started with
 [Google Fusion Tables](https://support.google.com/fusiontables/answer/184641?hl=en) if you are new to them.
 
+### Testing
+To check that the project is properly run tests by running the functional tests in `functional_tests.py` and units tests
+in `addresses/tests.py`. To run functional tests, [Mozilla Firefox](https://www.mozilla.org/firefox/) and
+[Geckodriver](https://github.com/mozilla/geckodriver/releases) driver for Mozilla Firefox are required.
+To install in your project, follow the instructions
+[here](https://www.obeythetestinggoat.com/book/pre-requisite-installations.html#_installing_django_and_selenium).
+
+To run first activate your virtualenv and run the following commands:
+
+- To run functional tests, run:
+
+`python functional_tests.py`
+
+- To run unit tests, run:
+
+`python manage.py test`
+
 
 ## How-to Guides
 ### Create a Google Fusion Table
@@ -60,6 +78,17 @@ To create a Google Fusion Table, follow the [Google Fusion Tables tutorial](http
  and `Longitude` to `longitude`.
  - `location` - set type to `Text`.
 
+### Customise model
+
+### Customise JSON data to be saved from map
+
+### Save location data to sqlite database
+
+### Save location data to Google Fusion Table
+
+### Reset database and Google Fusion Table
+
+### Testing
 
 ## Explanation
 ### How the app works
