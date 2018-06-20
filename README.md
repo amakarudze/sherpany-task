@@ -21,8 +21,7 @@ Visit [this link](https://support.google.com/fusiontables/answer/184641?hl=en) f
 
 ## How-to Guides
 ### Create a Google Fusion Table
-To create a Google Fusion Table, follow the [Google Fusion Tables tutorial]
-(https://support.google.com/fusiontables/answer/184641?hl=en). Rename your fields in the table to `latitude`,
+To create a Google Fusion Table, follow the [Google Fusion Tables tutorial](https://support.google.com/fusiontables/answer/184641?hl=en). Rename your fields in the table to `latitude`,
  `longitude` and `location` and hide the `date` field as it is not necesary for the project. Set the following
  data types for the fields:
  - `longitude` - `Number`.
