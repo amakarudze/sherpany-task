@@ -100,12 +100,30 @@
                         console.log(address, lat, lng);
                         infowindow.open(map, marker);
 
-                        postdata = JSON.stringify({address: address, lat: lat, lng: lng});
+                        postdata = [
+                            {
+                                "model": "addresses.address",
+                                "fields": {
+                                    "address": address,
+                                    "lat": lat,
+                                    "lng": lng
+                                }
+                            }];
 
                         $.ajax('/ajax/add_address/', {
-                            data : postdata,
-                            contentType : 'application/json',
-                            type : 'POST'
+                            data : {
+                                'postdata': postdata
+                            },
+                            dataType : 'json',
+                            type : 'POST',
+                            success: function (data) {
+                                        if (data.is_duplicate) {
+                                            alert(data.error_message);
+                                        }
+                                        if (data.has_no_address) {
+                                            alert(data.error_message);
+                                        }
+                            }
                         });
 
                         $.ajax('/',{

@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect
 from django.core import serializers
@@ -11,19 +13,22 @@ def home_page(request):
 
 
 def add_address(request):
-    location = request.GET.get('postdata', None)
-    deserialized_object = serializers.deserialize("json", location)
-    data = {
-        'is_duplicate': Address.objects.filter(address__iexact=deserialized_object.address).exists(),
-        'has_no_address': 'Unnamed Road' in deserialized_object.address
-    }
-    if data['is_duplicate']:
-        data['error_message'] = 'The address has already been saved. Duplicates are not allowed.'
-    elif data['has_no_address']:
-        data['error_message'] = 'Location does not have an address and cannot be saved.'
-    else:
-        deserialized_object.save()
-    return JsonResponse(data)
+    if request.is_ajax():
+        location = request.POST.get('postdata')
+        for deserialized_object in serializers.deserialize("json", location):
+            data = {
+                'is_duplicate': Address.objects.filter(address__iexact=deserialized_object.address).exists(),
+                'has_no_address': 'Unnamed Road' in deserialized_object.address
+            }
+            if data['is_duplicate']:
+                data['error_message'] = 'The address has already been saved. Duplicates are not allowed.'
+            elif data['has_no_address']:
+                data['error_message'] = 'Location does not have an address and cannot be saved.'
+            else:
+                Address.objects.create(address=deserialized_object.address,
+                                   lat=float(deserialized_object.lat),
+                                   lng=float(deserialized_object.lng))
+        return JsonResponse(data)
 
 
 def reset_map(request):
