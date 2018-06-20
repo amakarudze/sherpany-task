@@ -16,7 +16,7 @@ Create API keys for [Google Maps](https://developers.google.com/maps/documentati
 
 If you do not have a separate developer account with [Google](https://mail.google.com), it maybe necessary that
 you sign up for one that you will use to work with Google Fusion Tables so that you do not risk losing your data.
-Visit [this link] (https://support.google.com/fusiontables/answer/184641?hl=en) for more information on how to get started with
+Visit [this link](https://support.google.com/fusiontables/answer/184641?hl=en) for more information on how to get started with
 [Google Fusion Tables](https://support.google.com/fusiontables/answer/184641?hl=en) if you are new to them.
 
 ## How-to Guides
