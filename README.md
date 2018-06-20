@@ -21,6 +21,7 @@ This is app requires the following to run:
  - Google Developer Account
  - Google Maps API Key
  - Google Fusion Tables API Key
+ - Google APIs Client Library for Python
  - Geckodriver for running functional tests with Selenium and Mozilla Firefox browser.
 
 ### Installation
@@ -63,6 +64,9 @@ append the query parameter key=`YOUR_API_KEY` to all request URLs. For example, 
 `https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM
      1KxVV0wQXhxhMScSDuqr-0Ebf0YEt4m4xzVplKd4&key=`
      `YOUR_API_KEY`
+
+### Working with Google APIs Client Library for Python
+
 
 ### Testing
 To check that the project is properly run tests by running the functional tests in `functional_tests.py` and units tests
