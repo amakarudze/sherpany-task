@@ -96,6 +96,9 @@ To create a Google Fusion Table, follow the [Google Fusion Tables tutorial](http
  and `Longitude` to `longitude`.
  - `location` - set type to `Text`.
 
+ You may need to [change permissions for your Google Fusion Table](https://developers.google.com/fusiontables/docs/v2/using#authTbl)
+  and make it `Public` so that you can post to it from your app.
+
 ### Customise model
 
 ### Customise JSON data to be saved from map
