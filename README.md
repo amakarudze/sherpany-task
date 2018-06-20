@@ -50,9 +50,7 @@ Create API key for [Google Maps](https://developers.google.com/maps/documentatio
 `YOUR_API_KEY` values in `templates/addresses/index.html` file in this line:
 
 `<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=`
-    `YOUR_API_KEY`
-    `&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
     </script>`
 
 #### Google Fusion Table API Key
