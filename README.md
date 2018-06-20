@@ -96,7 +96,14 @@ To create a Google Fusion Table, follow the [Google Fusion Tables tutorial](http
 
 ## Explanation
 This section explains how the app works. When a user clicks a position on the map, a Javascript function conducts
-reverse geo-location using the Google Map API to find the address of the clicked location.
+reverse geo-location using the Google Map API to find if the clicked place has a real address and is not some
+wood/mountain/ocean. If the place has a valid address, it is saved to the database with lat, lng and address
+(which is a single string) and also saves the data to Google Fusion Tables.
+
+A marker will appear instantly based on the data in the Google Fusion Tables and the list of addresses beneath the
+map will also be updated instantly. Duplicates on Google Fusion Tables are not allowed.
+
+Clicking on the reset link, resets both the database and Google Fusion Table, allowing the user to start again.
 
 ## Reference
 
