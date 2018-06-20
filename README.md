@@ -50,7 +50,9 @@ Create API key for [Google Maps](https://developers.google.com/maps/documentatio
 `YOUR_API_KEY` values in `templates/addresses/index.html` file in this line:
 
 `<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=``YOUR_API_KEY``&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=`
+    `YOUR_API_KEY`
+    `&callback=initMap">
     </script>`
 
 #### Google Fusion Table API Key
@@ -61,7 +63,8 @@ Create API key for [Google Fusion Tables](https://developers.google.com/fusionta
 append the query parameter key=`YOUR_API_KEY` to all request URLs. For example, in a `SELECT` query,
 
 `https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM
-     1KxVV0wQXhxhMScSDuqr-0Ebf0YEt4m4xzVplKd4&key=``YOUR_API_KEY`
+     1KxVV0wQXhxhMScSDuqr-0Ebf0YEt4m4xzVplKd4&key=`
+     `YOUR_API_KEY`
 
 ### Testing
 To check that the project is properly run tests by running the functional tests in `functional_tests.py` and units tests
