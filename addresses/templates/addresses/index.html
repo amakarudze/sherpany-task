@@ -36,25 +36,44 @@
                 </ul>
             </div>
         </nav>
-
+        {% block content %}
         <hr>
         <h1>Maps & Addresses</h1>
         <hr>
 
         <!--The div element for the map -->
-        <form id="add_address_Form" method="post">
+        <form id="add-address-form" method="POST">
             <div id="map" class="map">
             </div>
+            {{ form.as_p }}
             {% csrf_token %}
         </form>
 
+        <hr>
+        <h2>Addresses of clicked locations</h2>
+        <hr>
+
+        {% if address_list %}
+            {% for address in address_list %}
+                {% if forloop.first %}<div class="row">{% endif %}
+                    <div class="col-md-6">
+                        <h5 class="">{{ address.address }}</h5>
+                        <p>Coordinates: {{ address.lat }}, {{ address.lng }}</p>
+                    </div>
+                {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
+                {% if forloop.last %}</div>{% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endblock %}
+
+        {% block javascript %}
         <!-- Script for loading map -->
         <script>
             var map, infoWindow;
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: -34.397, lng: 150.644},
-                    zoom: 1
+                    zoom: 2
                 });
                 var geocoder = new google.maps.Geocoder;
                 infowindow = new google.maps.InfoWindow;
@@ -85,49 +104,47 @@
                 geocoder.geocode({'location': latlng}, function(results, status) {
                 if (status === 'OK') {
                     if (results[0]) {
-                        map.setZoom(1);
+                        map.setZoom(2);
                         /* var marker = new google.maps.Marker({
                             position: latlng,
                             map: map
                         });*/
                         // infowindow.setContent(results[0].formatted_address);
-                        var address = results[0].formatted_address;
+                        var location = results[0].formatted_address;
                         var lat = pos.lat;
                         var lng = pos.lng;
-                        console.log(address, lat, lng);
+                        // console.log(location, lat, lng);
+
+                        var postdata = [{
+                                        "location": location,
+                                        "lat": lat,
+                                        "lng": lng
+                                }];
                         // infowindow.open(map, marker);
 
-                        postdata = [
-                            {
-                                "model": "addresses.address",
-                                "fields": {
-                                    "address": address,
-                                    "lat": lat,
-                                    "lng": lng
-                                }
-                            }];
-
-                        $.ajax('/ajax/add_address/', {
-                            data : {
-                                'postdata': postdata
-                            },
-                            dataType : 'json',
-                            type : 'POST',
-                            success: function (data) {
-                                        if (data.is_duplicate) {
-                                            alert(data.error_message);
-                                        }
-                                        if (data.has_no_address) {
-                                            alert(data.error_message);
-                                        }
-                            }
+                        var $endpoint = '/';
+                        $.ajax({
+                            method: "POST",
+                            url: $endpoint,
+                            data: JSON.stringify(postdata),
+                            contentType: 'application/json',
+                            success: handleFormSuccess,
+                            error: handleFormError
                         });
 
-                        $.ajax('/',{
-                            contentType : 'application/json',
-                            type: 'GET'
-                            });
-                    }
+                        function handleFormSuccess(data, textStatus, jqXHR){
+                        console.log(data);
+                        // console.log(textStatus);
+                        console.log(jqXHR);
+                        $myForm.reset(); // reset form data
+                        }
+
+                        function handleFormError(jqXHR, textStatus, errorThrown){
+                            console.log(jqXHR);
+                        }
+                        // console.log(textStatus);
+                        // console.log(errorThrown);
+                        }
                     else {
                         window.alert('No results found');
                         }
@@ -138,22 +155,7 @@
                 });
             }
         </script>
-
-        <hr>
-        <h2>Addresses of clicked locations</h2>
-        <hr>
-
-        {% if address_list %}
-            {% for address in address_list %}
-                {% if forloop.first %}<div class="row">{% endif %}
-                    <div class="col-md-6">
-                        <h5 class="">{{ address.address }}</h5>
-                        <p>Coordinates: {{ address.lat }}, {{ address.lng }}</p>
-                    </div>
-                {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
-                {% if forloop.last %}</div>{% endif %}
-            {% endfor %}
-        {% endif %}
+        {% endblock javascript %}
 
     </div>
 
