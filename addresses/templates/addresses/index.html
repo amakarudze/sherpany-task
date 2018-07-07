@@ -117,15 +117,11 @@
                         var lat = pos.lat;
                         var lng = pos.lng;
 
-                        var postdata = [{
-                                    "fields":
-                                        {
-                                            "location": location,
-                                            "lat": lat,
-                                            "lng": lng
-                                        },
-                                    "model": "addresses.address"
-                                }];
+                        var postdata = {
+                                        'location': location,
+                                        'lat': lat,
+                                        'lng': lng
+                                        };
 
                         var $endpoint = '/';
                         $.ajax({
@@ -138,8 +134,7 @@
                         });
 
                         function handleSaveSuccess(){
-                            alert("Location saved to database and Google Fusion Tables.")
-                            window.location.reload()
+                           window.location.reload();
                         }
 
                         function handleSaveError(){
