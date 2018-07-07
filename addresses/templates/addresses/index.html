@@ -143,23 +143,19 @@
                             url: $endpoint,
                             data: JSON.stringify(postdata),
                             contentType: 'application/json',
-                            success: handleFormSuccess,
-                            error: handleFormError
+                            success: handleSaveSuccess,
+                            error: handleSaveError
                         });
 
-                        function handleFormSuccess(data, textStatus, jqXHR){
-                        console.log(data);
-                        // console.log(textStatus);
-                        console.log(jqXHR);
-                        $myForm.reset(); // reset form data
+                        function handleSaveSuccess(){
+                            alert("Location saved to database and Google Fusion Tables.")
+                            window.location.reload()
                         }
 
-                        function handleFormError(jqXHR, textStatus, errorThrown){
-                            console.log(jqXHR);
+                        function handleSaveError(){
+                            alert("Could not save location.");
                         }
-                        // console.log(textStatus);
-                        // console.log(errorThrown);
-                        }
+                    }
                     else {
                         window.alert('No results found');
                         }

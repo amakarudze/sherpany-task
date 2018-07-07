@@ -3,6 +3,7 @@ from datetime import datetime
 
 from django.views.generic import TemplateView
 from django.http import JsonResponse, HttpResponseRedirect
+from rest_framework.parsers import JSONParser
 
 from .models import Address
 from .forms import AddressForm
@@ -17,14 +18,12 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['title'] = 'Home'
         context['year'] = datetime.now().year
-        addresses = Address.objects.all()
-        serializer = AddressSerializer(addresses, many=True)
-        context['address_list'] = JsonResponse(serializer.data, safe=False)
+        context['address_list'] = Address.objects.all()
         return context
 
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
-            data = json.loads(request.body)
+            data = JSONParser().parse(request)
             serializer = AddressSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
