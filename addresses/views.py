@@ -28,7 +28,6 @@ class HomeView(TemplateView):
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             data = JSONParser().parse(request)
-            print(data)
             serializer = AddressSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
