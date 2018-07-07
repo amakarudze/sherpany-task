@@ -21,6 +21,5 @@ from addresses import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.HomeView.as_view(), name='home'),
-    url(r'add_address/$', views.add_address, name='add_address'),
     url(r'reset_map/$', views.reset_map, name='reset_map'),
 ]

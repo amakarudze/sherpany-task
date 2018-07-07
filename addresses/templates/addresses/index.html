@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Maps & Addresses</title>
+    <title>Maps & Addresses - {{ title}}</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -57,13 +57,23 @@
             {% for address in address_list %}
                 {% if forloop.first %}<div class="row">{% endif %}
                     <div class="col-md-6">
-                        <h5 class="">{{ address.address }}</h5>
+                        <h5 class="">{{ address.location }}</h5>
                         <p>Coordinates: {{ address.lat }}, {{ address.lng }}</p>
                     </div>
                 {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
                 {% if forloop.last %}</div>{% endif %}
             {% endfor %}
         {% endif %}
+        <hr>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Anna Makarudze {{ year }}</p>
+                </div>
+            </div>
+        </footer>
+
         {% endblock %}
 
         {% block javascript %}
@@ -116,10 +126,15 @@
                         // console.log(location, lat, lng);
 
                         var postdata = [{
-                                        "location": location,
-                                        "lat": lat,
-                                        "lng": lng
+                                    "fields":
+                                        {
+                                            "location": location,
+                                            "lat": lat,
+                                            "lng": lng
+                                        },
+                                    "model": "addresses.address"
                                 }];
+
                         // infowindow.open(map, marker);
 
                         var $endpoint = '/';

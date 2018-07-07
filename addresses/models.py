@@ -13,11 +13,11 @@ class Address(models.Model):
         return self.location
 
     @classmethod
-    def create(cls, lat, lng, address):
-        if "Unnamed Road" in address:
+    def create(cls, lat, lng, location):
+        if "Unnamed Road" in location:
             raise ValueError("Location does not have an address")
-        elif Address.objects.filter(location__iexact=address).exists():
+        elif Address.objects.filter(location__iexact=location).exists():
             raise IntegrityError("That address already exists in the database")
         else:
-            new_address = cls(lat=lat, lng=lng, location=address)
+            new_address = cls(lat=lat, lng=lng, location=location)
         return new_address
