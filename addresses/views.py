@@ -24,10 +24,12 @@ class HomeView(TemplateView):
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             data = JSONParser().parse(request)
-            serializer = AddressSerializer(data=data)
+            data = dict(data)
+            serializer = AddressSerializer(data=data, many=True)
             if serializer.is_valid():
                 serializer.save()
                 return JsonResponse(serializer.data, status=201)
+            print(serializer.errors)
             return JsonResponse(serializer.errors, status=400)
 
 def reset_map(request):

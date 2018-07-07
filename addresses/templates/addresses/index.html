@@ -88,25 +88,47 @@
                 var geocoder = new google.maps.Geocoder;
                 infowindow = new google.maps.InfoWindow;
 
-                // Try HTML5 geolocation.
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        var pos = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };
-
-                        //Add listener
-                        map.addListener("click", function (event) {
-                            var pos = {
+                // Add listener for mouse click event
+                map.addListener("click", function (event) {
+                    var pos = {
                                 lat: event.latLng.lat(),
                                 lng: event.latLng.lng()
                             };
-                            geocodeLatLng(geocoder, map, infowindow, pos);
-                            // console.log(pos);
-                        }); //end addListener
-                    });
-                }
+                    geocodeLatLng(geocoder, map, infowindow, pos);
+                }); //end addListener
+
+                // Get markers for clicked locations from Google Fusion Tables
+                var query = "SELECT lat, lng, FROM " +
+                            '1FM7o8dlxWT5BxBoK-UC0-h_oFCuuH9-3wcxh7KM6';
+                var encodedQuery = encodeURIComponent(query);
+
+                // Construct the URL
+                var url = ['https://www.googleapis.com/fusiontables/v1/query'];
+                url.push('?sql=' + encodedQuery);
+                url.push('&key=AIzaSyDA6r1mrmzhCnZVX5gtB_RT45Ab4sKMkBE');
+                url.push('&callback=?');
+
+                 // Send the JSONP request using jQuery
+                $.ajax({
+                    url: url.join(''),
+                    dataType: 'jsonp',
+                    success: function (data) {
+                        var rows = data['rows'];
+                        for (var i in rows) {
+                            var latitude = rows[i][0];
+                            var longitude = rows[i][1];
+                            var latlng = {
+                                "lat": latitude,
+                                "lng": longitude
+                            };
+                            var marker = new google.maps.Marker({
+                            position: latlng,
+                            map: map
+                            });
+                            infowindow.open(map, marker);
+                        }
+                    }
+                });
             }
 
             function geocodeLatLng(geocoder, map, infowindow, pos) {
@@ -115,15 +137,9 @@
                 if (status === 'OK') {
                     if (results[0]) {
                         map.setZoom(2);
-                        /* var marker = new google.maps.Marker({
-                            position: latlng,
-                            map: map
-                        });*/
-                        // infowindow.setContent(results[0].formatted_address);
                         var location = results[0].formatted_address;
                         var lat = pos.lat;
                         var lng = pos.lng;
-                        // console.log(location, lat, lng);
 
                         var postdata = [{
                                     "fields":
@@ -134,8 +150,6 @@
                                         },
                                     "model": "addresses.address"
                                 }];
-
-                        // infowindow.open(map, marker);
 
                         var $endpoint = '/';
                         $.ajax({
