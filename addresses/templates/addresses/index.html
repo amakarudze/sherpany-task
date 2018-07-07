@@ -98,37 +98,13 @@
                 }); //end addListener
 
                 // Get markers for clicked locations from Google Fusion Tables
-                var query = "SELECT lat, lng, FROM " +
-                            '1FM7o8dlxWT5BxBoK-UC0-h_oFCuuH9-3wcxh7KM6';
-                var encodedQuery = encodeURIComponent(query);
-
-                // Construct the URL
-                var url = ['https://www.googleapis.com/fusiontables/v1/query'];
-                url.push('?sql=' + encodedQuery);
-                url.push('&key=AIzaSyDA6r1mrmzhCnZVX5gtB_RT45Ab4sKMkBE');
-                url.push('&callback=?');
-
-                 // Send the JSONP request using jQuery
-                $.ajax({
-                    url: url.join(''),
-                    dataType: 'jsonp',
-                    success: function (data) {
-                        var rows = data['rows'];
-                        for (var i in rows) {
-                            var latitude = rows[i][0];
-                            var longitude = rows[i][1];
-                            var latlng = {
-                                "lat": latitude,
-                                "lng": longitude
-                            };
-                            var marker = new google.maps.Marker({
-                            position: latlng,
-                            map: map
-                            });
-                            infowindow.open(map, marker);
-                        }
+                var layer = new google.maps.FusionTablesLayer({
+                    query: {
+                    select: 'lat',
+                    from: '1FM7o8dlxWT5BxBoK-UC0-h_oFCuuH9-3wcxh7KM6'
                     }
                 });
+                layer.setMap(map);
             }
 
             function geocodeLatLng(geocoder, map, infowindow, pos) {
