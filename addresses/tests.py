@@ -26,6 +26,7 @@ class AddressModelTest(TestCase):
         self.assertEqual(str(address2), address2.address)
 
     def test_does_not_accept_unnamed_address(self):
+
         with self.assertRaises(ValidationError):
             Address.objects.create(lat=-17.957160658802813, lon=31.12964037109373,
                                               address="Unnamed Road, Zimbabwe")
