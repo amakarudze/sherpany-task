@@ -115,8 +115,6 @@ To create a Google Fusion Table, follow the [Google Fusion Tables tutorial](http
 
 ### Reset database and Google Fusion Table
 
-### Testing
-
 ## Explanation
 This section explains how the app works. When a user clicks a position on the map, a Javascript function conducts
 reverse geo-location using the Google Map API to find if the clicked place has a real address and is not some
