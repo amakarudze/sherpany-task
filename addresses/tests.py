@@ -26,10 +26,11 @@ class AddressModelTest(TestCase):
         self.assertEqual(str(address2), address2.address)
 
     def test_does_not_accept_unnamed_address(self):
+        address3 = Address.objects.create(lat=-17.957160658802813, lon=31.12964037109373,
+                               address="Unnamed Road, Zimbabwe")
+        address3.address.validate_address("Unnamed Road, Zimbabwe")
+        self.assertRaises(ValidationError, address3.validate_address)
 
-        with self.assertRaises(ValidationError):
-            Address.objects.create(lat=-17.957160658802813, lon=31.12964037109373,
-                                              address="Unnamed Road, Zimbabwe")
 
     def test_does_not_accept_duplicate_address(self):
         Address.objects.create(lat=-17.8251657, lon=31.033510000000003,
@@ -39,8 +40,8 @@ class AddressModelTest(TestCase):
                                               address="Herbert Chitepo Ave, Harare, Zimbabwe")
 
     def test_can_reset_database(self):
-        address3 = Address.objects.create(lat=-17.8251657, lon=31.033510000000003,
+        address4 = Address.objects.create(lat=-17.8251657, lon=31.033510000000003,
                                           address="Herbert Chitepo Ave, Harare, Zimbabwe")
         Address.objects.all().delete()
         response = self.client.get('/')
-        self.assertNotContains(response, address3.address)
+        self.assertNotContains(response, address4.address)
