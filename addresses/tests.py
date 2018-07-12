@@ -28,8 +28,9 @@ class AddressModelTest(TestCase):
     def test_does_not_accept_unnamed_address(self):
         address3 = Address.objects.create(lat=-17.957160658802813, lon=31.12964037109373,
                                address="Unnamed Road, Zimbabwe")
-        address3.address.validate_address("Unnamed Road, Zimbabwe")
-        self.assertRaises(ValidationError, address3.validate_address)
+        with self.assertRaises(ValidationError):
+            address3.save()
+            address3.full_clean()
 
 
     def test_does_not_accept_duplicate_address(self):

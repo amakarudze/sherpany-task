@@ -1,4 +1,5 @@
 import urllib3, urllib.parse, httplib2
+import requests
 from datetime import datetime
 
 from django.views.generic.list import ListView
@@ -27,13 +28,10 @@ class HomeView(ListView):
             serializer = AddressSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
-                http = httplib2.Http()
-                url = 'https://www.googleapis.com/fusiontables/v2/tables/1FM7o8dlxWT5BxBoK-UC0-h_oFCuuH9-3wcxh7KM6'
-                body = serializer.data
-                headers = {'Content-type': 'application/json'}
-                response, content = http.request(url, 'POST', headers=headers, body=urllib.parse.urlencode(body))
+                requests.post(
+                    'https://www.google.com/fusiontables/query?sql=INSERT INTO 1FM7o8dlxWT5BxBoK-UC0-h_oFCuuH9-3wcxh7KM6'
+                    '({lat, lon, address}) VALUES (serializer.data)&key=AIzaSyDA6r1mrmzhCnZVX5gtB_RT45Ab4sKMkBE')
                 return JsonResponse(serializer.data, status=201)
-            print(serializer.errors)
             return JsonResponse(serializer.errors, status=400)
 
 

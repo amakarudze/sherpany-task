@@ -85,6 +85,16 @@
                     center: {lat: -34.397, lng: 150.644},
                     zoom: 2
                 });
+
+                // Get markers for clicked locations from Google Fusion Tables
+                var layer = new google.maps.FusionTablesLayer({
+                    query: {
+                    select: "'lat', 'lon', 'address'",
+                    from: '1FM7o8dlxWT5BxBoK-UC0-h_oFCuuH9-3wcxh7KM6'
+                    }
+                });
+                layer.setMap(map);
+
                 var geocoder = new google.maps.Geocoder;
                 infowindow = new google.maps.InfoWindow;
 
@@ -96,15 +106,6 @@
                             };
                     geocodeLatLng(geocoder, map, infowindow, pos);
                 }); //end addListener
-
-                // Get markers for clicked locations from Google Fusion Tables
-                var layer = new google.maps.FusionTablesLayer({
-                    query: {
-                    select: 'lat',
-                    from: '1FM7o8dlxWT5BxBoK-UC0-h_oFCuuH9-3wcxh7KM6'
-                    }
-                });
-                layer.setMap(map);
             }
 
             function geocodeLatLng(geocoder, map, infowindow, pos) {
