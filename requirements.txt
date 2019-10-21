@@ -3,7 +3,7 @@ certifi==2018.4.16
 chardet==3.0.4
 coverage==4.5.1
 Django==1.9
-djangorestframework==3.6.4
+djangorestframework==3.9.1
 get==1.0.3
 google-api-python-client==1.7.3
 google-auth==1.5.0
